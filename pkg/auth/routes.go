@@ -1,6 +1,8 @@
 package auth
 
 import (
+	"fmt"
+
 	"github.com/OlegDjur/go-grpc-api-gateway/pkg/auth/routes"
 	"github.com/OlegDjur/go-grpc-api-gateway/pkg/config"
 	"github.com/gin-gonic/gin"
@@ -10,6 +12,8 @@ func RegisterRoutes(r *gin.Engine, c *config.Config) *ServiceClient {
 	svc := &ServiceClient{
 		Client: InitServiceClient(c),
 	}
+	fmt.Println(svc)
+	fmt.Println(svc.Client)
 
 	routes := r.Group("/auth")
 	routes.POST("/register", svc.Register)
