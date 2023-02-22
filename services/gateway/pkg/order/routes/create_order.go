@@ -2,6 +2,7 @@ package routes
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/OlegDjur/go-grpc-api-gateway/pkg/order/pb"
@@ -32,6 +33,8 @@ func CreateOrder(ctx *gin.Context, c pb.OrderServiceClient) {
 		ctx.AbortWithError(http.StatusBadGateway, err)
 		return
 	}
+
+	fmt.Println(res)
 
 	ctx.JSON(http.StatusCreated, &res)
 }

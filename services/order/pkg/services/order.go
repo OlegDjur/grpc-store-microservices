@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/OlegDjur/go-grpc-order-svc/pkg/client"
@@ -18,6 +19,7 @@ type Server struct {
 
 func (s *Server) CreateOrder(ctx context.Context, req *pb.CreateOrderRequest) (*pb.CreateOrderResponse, error) {
 	product, err := s.ProductSvc.FindOne(req.ProductId)
+	fmt.Println(product.Data.Stock, req.Quantity)
 	if err != nil {
 		return &pb.CreateOrderResponse{Status: http.StatusBadRequest, Error: err.Error()}, nil
 	} else if product.Status >= http.StatusNotFound {

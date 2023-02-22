@@ -14,6 +14,11 @@ type LoginRequestBody struct {
 	Password string `json:"password"`
 }
 
+// type LoginResponseBody struct {
+// 	Status string `json:"status"`
+// 	token  string `json:"token"`
+// }
+
 func Login(ctx *gin.Context, c pb.AuthServiceClient) {
 	b := LoginRequestBody{}
 
@@ -31,7 +36,7 @@ func Login(ctx *gin.Context, c pb.AuthServiceClient) {
 		return
 	}
 
-	fmt.Println(res)
+	fmt.Println(res.Token)
 
-	ctx.JSON(http.StatusCreated, &res)
+	ctx.JSON(http.StatusOK, &res)
 }

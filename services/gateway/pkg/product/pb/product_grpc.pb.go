@@ -23,7 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProductServiceClient interface {
 	CreateProduct(ctx context.Context, in *CreateProductRequest, opts ...grpc.CallOption) (*CreateProductResponse, error)
-	FindeOne(ctx context.Context, in *FindOneRequest, opts ...grpc.CallOption) (*CreateProductResponse, error)
+	FindOne(ctx context.Context, in *FindOneRequest, opts ...grpc.CallOption) (*FindOneResponse, error)
 	DecreaseStock(ctx context.Context, in *DecreaseStockRequest, opts ...grpc.CallOption) (*DecreaseStockResponse, error)
 }
 
@@ -44,9 +44,9 @@ func (c *productServiceClient) CreateProduct(ctx context.Context, in *CreateProd
 	return out, nil
 }
 
-func (c *productServiceClient) FindeOne(ctx context.Context, in *FindOneRequest, opts ...grpc.CallOption) (*CreateProductResponse, error) {
-	out := new(CreateProductResponse)
-	err := c.cc.Invoke(ctx, "/product.ProductService/FindeOne", in, out, opts...)
+func (c *productServiceClient) FindOne(ctx context.Context, in *FindOneRequest, opts ...grpc.CallOption) (*FindOneResponse, error) {
+	out := new(FindOneResponse)
+	err := c.cc.Invoke(ctx, "/product.ProductService/FindOne", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -67,7 +67,7 @@ func (c *productServiceClient) DecreaseStock(ctx context.Context, in *DecreaseSt
 // for forward compatibility
 type ProductServiceServer interface {
 	CreateProduct(context.Context, *CreateProductRequest) (*CreateProductResponse, error)
-	FindeOne(context.Context, *FindOneRequest) (*CreateProductResponse, error)
+	FindOne(context.Context, *FindOneRequest) (*FindOneResponse, error)
 	DecreaseStock(context.Context, *DecreaseStockRequest) (*DecreaseStockResponse, error)
 	mustEmbedUnimplementedProductServiceServer()
 }
@@ -79,8 +79,8 @@ type UnimplementedProductServiceServer struct {
 func (UnimplementedProductServiceServer) CreateProduct(context.Context, *CreateProductRequest) (*CreateProductResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateProduct not implemented")
 }
-func (UnimplementedProductServiceServer) FindeOne(context.Context, *FindOneRequest) (*CreateProductResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FindeOne not implemented")
+func (UnimplementedProductServiceServer) FindOne(context.Context, *FindOneRequest) (*FindOneResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindOne not implemented")
 }
 func (UnimplementedProductServiceServer) DecreaseStock(context.Context, *DecreaseStockRequest) (*DecreaseStockResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DecreaseStock not implemented")
@@ -116,20 +116,20 @@ func _ProductService_CreateProduct_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ProductService_FindeOne_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ProductService_FindOne_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(FindOneRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ProductServiceServer).FindeOne(ctx, in)
+		return srv.(ProductServiceServer).FindOne(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/product.ProductService/FindeOne",
+		FullMethod: "/product.ProductService/FindOne",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ProductServiceServer).FindeOne(ctx, req.(*FindOneRequest))
+		return srv.(ProductServiceServer).FindOne(ctx, req.(*FindOneRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -164,8 +164,8 @@ var ProductService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ProductService_CreateProduct_Handler,
 		},
 		{
-			MethodName: "FindeOne",
-			Handler:    _ProductService_FindeOne_Handler,
+			MethodName: "FindOne",
+			Handler:    _ProductService_FindOne_Handler,
 		},
 		{
 			MethodName: "DecreaseStock",
