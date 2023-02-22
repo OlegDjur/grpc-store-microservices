@@ -25,7 +25,7 @@ func InitProductServiceClient(url string) ProductServiceClient {
 	return c
 }
 
-func (c *ProductServiceClient) FindeOne(productId int64) (*pb.FindOneResponse, error) {
+func (c *ProductServiceClient) FindOne(productId int64) (*pb.FindOneResponse, error) {
 	req := &pb.FindOneRequest{
 		Id: productId,
 	}
