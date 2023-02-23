@@ -26,6 +26,7 @@ services:
     ports:
       - "50051:50051"
     hostname: auth
+
     environment:
       - DB_URL=postgres://olegdjur:qwerty@postgres:5432/simple_shop?sslmode=disable
     
@@ -40,6 +41,7 @@ services:
     ports:
       - "50052:50052"
     hostname: product
+
     environment:
      - DB_URL=postgres://olegdjur:qwerty@postgres:5432/simple_shop?sslmode=disable
     
@@ -55,9 +57,14 @@ services:
     ports:
      - "50053:50053"
     hostname: order
+
     environment:
-     - DB_URL=postgres://olegdjur:qwerty@postgres:5432/simple_shop
+     - DB_URL=postgres://olegdjur:qwerty@postgres:5432/simple_shop?sslmode=disable
     restart: on-failure
+
+    entrypoint: ["/app/wait-for.sh", "postgres:5432", "--"]
+    command: [ "/app/main" ]
+
     networks:
       - app
 
