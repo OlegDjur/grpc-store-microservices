@@ -3,7 +3,6 @@ package db
 import (
 	"log"
 
-	"github.com/OlegDjur/go-grpc-auth-svc/pkg/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -18,7 +17,7 @@ func Init(url string) Handler {
 		log.Fatalln(err)
 	}
 
-	db.AutoMigrate(&models.User{})
+	// db.AutoMigrate(&models.User{})
 
 	return Handler{db}
 }

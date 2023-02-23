@@ -5,9 +5,8 @@ services:
     environment:
       - POSTGRES_USER=olegdjur
       - POSTGRES_PASSWORD=qwerty
-      - POSTGRES_DB=auth_svc
-      # - POSTGRES_DB=product_svc
-      # - POSTGRES_DB=order_svc
+      - POSTGRES_DB=simple_shop
+
     ports:
       - "5432:5432"
     networks:
@@ -28,24 +27,27 @@ services:
       - "50051:50051"
     hostname: auth
     environment:
-      - DB_URL=postgres://olegdjur:qwerty@postgres:5432/auth_svc
-    # restart: on-failure
-    entrypoint: ["/app/wait-for.sh", "postgres:5432", "--"]
+      - DB_URL=postgres://olegdjur:qwerty@postgres:5432/simple_shop?sslmode=disable
+    
+    entrypoint: ["/app/wait-for.sh", "postgres:5432", "--", "/app/start.sh"]
     command: [ "/app/main" ]
     networks:
       - app
 
-  # product:
-  #   build: ./services/product/
+  product:
+    build: ./services/product/
 
-  #   ports:
-  #     - "50052:50052"
-  #   hostname: product
-  #   environment:
-  #    - DB_URL=postgres://olegdjur:qwerty@postgres:5432/product_svc
-  #   restart: on-failure
-  #   networks:
-  #     - app
+    ports:
+      - "50052:50052"
+    hostname: product
+    environment:
+     - DB_URL=postgres://olegdjur:qwerty@postgres:5432/product_svc
+    
+    entrypoint: ["/app/wait-for.sh", "postgres:5432", "--", "/app/start.sh"]
+    command: [ "/app/main" ]
+
+    networks:
+      - app
 
   # order:
   #   build: ./services/order/
