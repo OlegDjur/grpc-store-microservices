@@ -13,5 +13,6 @@ WORKDIR /app
 
 COPY --from=builder /app/main .
 COPY pkg/config/envs/dev.env pkg/config/envs/dev.env
+COPY wait-for.sh .
 
 CMD ["/app/main"]

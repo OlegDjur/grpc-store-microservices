@@ -6,8 +6,8 @@ services:
       - POSTGRES_USER=olegdjur
       - POSTGRES_PASSWORD=qwerty
       - POSTGRES_DB=auth_svc
-      - POSTGRES_DB=product_svc
-      - POSTGRES_DB=order_svc
+      # - POSTGRES_DB=product_svc
+      # - POSTGRES_DB=order_svc
     ports:
       - "5432:5432"
     networks:
@@ -29,33 +29,35 @@ services:
     hostname: auth
     environment:
       - DB_URL=postgres://olegdjur:qwerty@postgres:5432/auth_svc
-    restart: on-failure
+    # restart: on-failure
+    entrypoint: ["/app/wait-for.sh", "postgres:5432", "--"]
+    command: [ "/app/main" ]
     networks:
       - app
 
-  product:
-    build: ./services/product/
+  # product:
+  #   build: ./services/product/
 
-    ports:
-      - "50052:50052"
-    hostname: product
-    environment:
-     - DB_URL=postgres://olegdjur:qwerty@localhost:5432/product_svc
-    restart: on-failure
-    networks:
-      - app
+  #   ports:
+  #     - "50052:50052"
+  #   hostname: product
+  #   environment:
+  #    - DB_URL=postgres://olegdjur:qwerty@postgres:5432/product_svc
+  #   restart: on-failure
+  #   networks:
+  #     - app
 
-  order:
-    build: ./services/order/
+  # order:
+  #   build: ./services/order/
 
-    ports:
-     - "50053:50053"
-    hostname: order
-    environment:
-     - DB_URL=postgres://olegdjur:qwerty@localhost:5432/order_svc
-    restart: on-failure
-    networks:
-      - app
+  #   ports:
+  #    - "50053:50053"
+  #   hostname: order
+  #   environment:
+  #    - DB_URL=postgres://olegdjur:qwerty@postgres:5432/order_svc
+  #   restart: on-failure
+  #   networks:
+  #     - app
 
 networks:
   app:
