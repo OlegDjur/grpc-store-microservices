@@ -41,25 +41,25 @@ services:
       - "50052:50052"
     hostname: product
     environment:
-     - DB_URL=postgres://olegdjur:qwerty@postgres:5432/product_svc
+     - DB_URL=postgres://olegdjur:qwerty@postgres:5432/simple_shop?sslmode=disable
     
-    entrypoint: ["/app/wait-for.sh", "postgres:5432", "--", "/app/start.sh"]
+    entrypoint: ["/app/wait-for.sh", "postgres:5432", "--"]
     command: [ "/app/main" ]
 
     networks:
       - app
 
-  # order:
-  #   build: ./services/order/
+  order:
+    build: ./services/order/
 
-  #   ports:
-  #    - "50053:50053"
-  #   hostname: order
-  #   environment:
-  #    - DB_URL=postgres://olegdjur:qwerty@postgres:5432/order_svc
-  #   restart: on-failure
-  #   networks:
-  #     - app
+    ports:
+     - "50053:50053"
+    hostname: order
+    environment:
+     - DB_URL=postgres://olegdjur:qwerty@postgres:5432/simple_shop
+    restart: on-failure
+    networks:
+      - app
 
 networks:
   app:
