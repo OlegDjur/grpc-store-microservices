@@ -9,4 +9,4 @@
 
 ![](https://github.com/OlegDjur/Readme/blob/master/grpc_shop/simple_shop_drawio.png)
 
-<img align="center" width="1000" height="1000" src="https://github.com/OlegDjur/Readme/blob/master/grpc_shop/simple_shop_drawio.png">
+<img align="center" width="600" height="600" src="https://github.com/OlegDjur/Readme/blob/master/grpc_shop/simple_shop_drawio.png">
