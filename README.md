@@ -8,3 +8,5 @@
 входящие HTTP-запросы. HTTP-запросы перенаправляются на микросервисы с помощью gRPC.
 
 ![](https://github.com/OlegDjur/Readme/blob/master/grpc_shop/simple_shop_drawio.png)
+
+<img align="left" width="100" height="100" src="https://github.com/OlegDjur/Readme/blob/master/grpc_shop/simple_shop_drawio.png">
