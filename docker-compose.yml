@@ -13,7 +13,7 @@ services:
       - app
 
   gateway:
-    build: ./services/gateway/
+    build: ./gateway/
  
     ports:
       - "3000:3000"
@@ -21,7 +21,7 @@ services:
     - app
 
   auth:
-    build: ./services/auth/
+    build: ./auth/
 
     ports:
       - "50051:50051"
@@ -36,7 +36,7 @@ services:
       - app
 
   product:
-    build: ./services/product/
+    build: ./product/
 
     ports:
       - "50052:50052"
@@ -52,7 +52,7 @@ services:
       - app
 
   order:
-    build: ./services/order/
+    build: ./order/
 
     ports:
      - "50053:50053"
