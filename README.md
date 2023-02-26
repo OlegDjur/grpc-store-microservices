@@ -1,4 +1,5 @@
-# Microservices in Go with gRPC, API Gateway, and Authentication
+# Microservices in Go with gRPC, 
+# API Gateway, and Authentication
 
 Это простой пример интернет магазина
 
