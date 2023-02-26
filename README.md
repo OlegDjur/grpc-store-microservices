@@ -7,6 +7,5 @@
 Проект состоит из 3 микросервисов и 1 API Gateway, который будет обрабатывать
 входящие HTTP-запросы. HTTP-запросы перенаправляются на микросервисы с помощью gRPC.
 
-![](https://github.com/OlegDjur/Readme/blob/master/grpc_shop/simple_shop_drawio.png)
+<div align="center>![](https://github.com/OlegDjur/Readme/blob/master/grpc_shop/simple_shop_drawio.png)</div>
 
-<img align="center" width="600" height="600" src="https://github.com/OlegDjur/Readme/blob/master/grpc_shop/simple_shop_drawio.png">
